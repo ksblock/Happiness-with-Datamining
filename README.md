@@ -53,3 +53,14 @@
 5. visualization
 	- 3차원 그래프 각도 조절 가능?
 	- 범례 넣기 (plt.legend())
+
+11/17 추가
+
+1. 데이터 읽기
+	- 국가 정보(국가명, 지역, 순위) 분리
+	- 데이터 평균, 표준편차 추가
+
+5. viualization
+	- 국가 정보 + 데이터(pca_component, clustering) 결합
+	- csv 파일로 저장
+

@@ -16,26 +16,31 @@ def main():
 
     #read execl data
     raw_data = pd.read_csv('dataset/2015.csv')
-    #print(raw_data)
-    #data description 추가 mean, SD등
 
+    #separate index and factor score
+    index = raw_data.iloc[:,0:3]
     data = raw_data.drop(['Country','Region','Happiness Rank','Happiness Score', 'Standard Error'],axis = 1)
-    #print(data)
 
     #calculate coefficient correlation
-
     corr = data.corr(method='pearson')
-    #print(corr)
 
-    #dimension reduction
     df = pd.DataFrame(data)
     df_scaled = StandardScaler().fit_transform(df)
-    #print(df_scaled)
+
+    #data description
+    means = df.mean()
+    sd = df.std()
+
+    print('Means')
+    print(means)
+    print('Standard Deviation')
+    print(sd)
+    #add normality test, basic visualization
+
+    #dimension reduction
     pca = PCA(n_components = 3)
     pca.fit(df_scaled)
     df_pca = pca.transform(df_scaled)
-    print(df_pca.shape)
-    #print(df_pca)
 
     pca_columns = ['pca_component_1', 'pca_component_2', 'pca_component_3']
     df_pca = pd.DataFrame(df_pca, columns=pca_columns)
@@ -51,7 +56,6 @@ def main():
 
     result = df_pca.copy()
     result['cluster'] = kmeans.labels_
-    print(result)
 
     #visualization
     fig = plt.figure(figsize=(6, 6))
@@ -59,7 +63,8 @@ def main():
     ax.scatter(result['pca_component_1'], result['pca_component_2'], result['pca_component_3'], c = result['cluster'], cmap='rainbow')
     plt.show()
 
-
+    output = pd.concat([index, result], axis=1)
+    output.to_csv('dataset/2015_result.csv')
 
 if __name__ == '__main__':
     main()
