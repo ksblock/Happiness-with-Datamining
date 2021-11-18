@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
@@ -23,6 +24,7 @@ def main():
 
     #calculate coefficient correlation
     corr = data.corr(method='pearson')
+    sns.heatmap(corr, cmap = 'Blues')
 
     df = pd.DataFrame(data)
     df_scaled = StandardScaler().fit_transform(df)
@@ -61,6 +63,9 @@ def main():
     fig = plt.figure(figsize=(6, 6))
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(result['pca_component_1'], result['pca_component_2'], result['pca_component_3'], c = result['cluster'], cmap='rainbow')
+    ax.set_xlabel('pca_component_1')
+    ax.set_ylabel('pca_component_2')
+    ax.set_zlabel('pca_component_3')
     plt.show()
 
     output = pd.concat([index, result], axis=1)
