@@ -60,7 +60,7 @@
 	- 국가 정보(국가명, 지역, 순위) 분리
 	- 데이터 평균, 표준편차 추가
 
-5. viualization
+5. visualization
 	- 국가 정보 + 데이터(pca_component, clustering) 결합
 	- csv 파일로 저장
 
@@ -68,3 +68,17 @@
 
 2. 상관관계 분석
 	- heatmap 추가
+
+11/22 추가
+
+1. 데이터 읽기
+	- 2015 ~ 2021 모두 반영, for문 사용
+
+2. 상관관계 분석
+	-자의적 해석 부분에서 앞의 세 개, 다음 세 개 합침
+
+3. dimension reduction
+	- sum 버전 추가
+
+5. visualization
+	- sum 버전 추가
